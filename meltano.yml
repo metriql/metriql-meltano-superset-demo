@@ -1,0 +1,31 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: 4a8a87aa-0df4-4e91-9c87-b94724e3e124
+plugins:
+  extractors:
+  - name: tap-facebook
+    variant: meltano
+    pip_url: git+https://gitlab.com/meltano/tap-facebook.git
+    config:
+      account_id: ${TAP_FACEBOOK_ACCOUNT_ID}
+      access_token: ${TAP_FACEBOOK_ACCESS_TOKEN}
+      start_date: ${VAR_FB_EL_START_DATE}
+      end_date: ${VAR_FB_EL_END_DATE}
+      result_return_limit: ${TAP_FACEBOOK_RESULT_RETURN_LIMIT}
+  loaders:
+  - name: target-snowflake
+    variant: meltano
+    pip_url: git+https://gitlab.com/meltano/target-snowflake.git
+    config:
+      account: ${TARGET_SNOWFLAKE_ACCOUNT}
+      username: ${TARGET_SNOWFLAKE_USERNAME}
+      password: ${TARGET_SNOWFLAKE_PASSWORD}
+      role: ${TARGET_SNOWFLAKE_SNOWFLAKE_ROLE}
+      database: ${TARGET_SNOWFLAKE_DATABASE}
+      warehouse: ${TARGET_SNOWFLAKE_WAREHOUSE}
+  transformers:
+  - name: dbt
+    pip_url: dbt==0.21.0
+  files:
+  - name: dbt
+    pip_url: git+https://gitlab.com/meltano/files-dbt.git@config-version-2

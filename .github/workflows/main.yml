@@ -1,0 +1,40 @@
+name: dbt
+
+on:
+  repository_dispatch:
+    types: [trigger_meltano_elt]
+  push:
+    branches:
+      - main
+jobs:
+  meltano_elt:
+    name: meltano ELT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: buremba/get-changed-files-with-regex@0.5
+        if: github.event_name == 'push' # only valid when a new commit is pushed
+        name: Changed Files Exporter with Regex
+        id: changedfiles
+        with:
+          token: ${{ github.token }}
+          pattern: '.+'
+      - name: Get Database Credentials
+        run: echo '${{secrets.dbt_profiles_yml}}' > profiles.yml
+      - name: Install meltano
+        run: |
+          sudo apt update && sudo apt install python3-pip && pip3 install --upgrade pip
+          pip3 install meltano
+          meltano install
+      - name: Run the extract and load
+        run: |
+          meltano elt tap-facebook target-snowflake
+          echo "Extract-load completed successfully!"
+      - name: Install dbt Dependencies
+        run: meltano invoke dbt:deps
+      - name: Run dbt compile # perform full-refresh for new/modified models
+        if: github.event_name == 'push'
+        run: meltano invoke dbt:compile
+      - name: Run ELT [Scheduled]
+        if: github.event_name == 'schedule'
+        run: meltano elt tap-facebook target-snowflake && meltano invoke dbt:compile
