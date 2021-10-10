@@ -3,6 +3,7 @@ name: meltano
 on:
   # repository_dispatch:
   #   types: [trigger_meltano_elt]
+  workflow_dispatch:
   push:
     branches:
       - main
