@@ -1,4 +1,4 @@
-name: dbt
+name: meltano
 
 on:
   repository_dispatch:
@@ -19,14 +19,12 @@ jobs:
         with:
           token: ${{ github.token }}
           pattern: '.+'
-      - name: Get Database Credentials
-        run: echo '${{secrets.dbt_profiles_yml}}' > profiles.yml
       - name: Install meltano
         run: |
           sudo apt update && sudo apt install python3-pip && pip3 install --upgrade pip
           pip3 install meltano
           meltano install
-      - name: Run the extract and load
+      - name: Run the extract, load and transform
         run: |
           meltano elt tap-facebook target-snowflake
           echo "Extract-load completed successfully!"
@@ -38,3 +36,4 @@ jobs:
       - name: Run ELT [Scheduled]
         if: github.event_name == 'schedule'
         run: meltano elt tap-facebook target-snowflake && meltano invoke dbt:compile
+      # to-do: save dbt manifest to a persistent storage
