@@ -36,11 +36,18 @@ jobs:
         with:
           token: ${{ github.token }}
           pattern: '.+'
-      - name: Install meltano
+      # Installs Python 3.8
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Installs Postgres, Meltano, and Meltano plugins
+      - name: Install Meltano and project plugins
         run: |
-          sudo apt update && sudo apt install python3-pip && pip3 install --upgrade pip
-          pip3 install meltano
+          apt-get update && apt-get install libpq-dev
+          pipx install meltano
           meltano install
+
       - name: Run the extract, load and transform
         run: |
           meltano elt tap-facebook target-snowflake
