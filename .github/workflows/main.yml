@@ -1,11 +1,27 @@
 name: meltano
 
 on:
-  repository_dispatch:
-    types: [trigger_meltano_elt]
+  # repository_dispatch:
+  #   types: [trigger_meltano_elt]
   push:
     branches:
       - main
+
+env:
+  TAP_FACEBOOK_ACCOUNT_ID:          ${{ secrets.TAP_FACEBOOK_ACCOUNT_ID }}
+  TAP_FACEBOOK_ACCESS_TOKEN:        ${{ secrets.TAP_FACEBOOK_ACCESS_TOKEN }}
+  TAP_FACEBOOK_RESULT_RETURN_LIMIT: 500
+  SF_ACCOUNT:                       ${{ secrets.SF_ACCOUNT }}
+  SF_USER:                          ${{ secrets.SF_USER }}
+  SF_PASSWORD:                      ${{ secrets.SF_PASSWORD }}
+  SF_ROLE:                          MARKETING
+  SF_DATABASE:                      ${{ secrets.SF_DATABASE }}
+  SF_WAREHOUSE:                     ${{ secrets.SF_WAREHOUSE }}
+  VAR_FB_EL_START_DATE:             '2019-12-08T00:00:00Z'
+  VAR_FB_EL_END_DATE:               '2020-01-12T00:00:00Z'
+  DBT_TARGET:                       snowflake
+  DBT_TARGET_SCHEMA:                DBT_MMS_DEMO
+
 jobs:
   meltano_elt:
     name: meltano ELT
