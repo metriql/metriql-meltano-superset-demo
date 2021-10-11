@@ -40,6 +40,12 @@ jobs:
           apt-get update && apt-get install libpq-dev
           pipx install meltano
           meltano install
+      - name: Upgrade fb_business package
+        run: |
+          source ${GITHUB_WORKSPACE}/.meltano/extractors/tap-facebook/venv/bin/activate
+          pip3 install facebook_business==12.0.0
+          echo "Upgraded facebook_business to 12.0.0"
+          deactivate
       - name: Sanity check
         run: |
           meltano --log-level=debug invoke --dump=catalog tap-facebook
