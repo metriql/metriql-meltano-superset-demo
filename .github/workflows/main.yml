@@ -15,12 +15,11 @@ env:
   SF_ACCOUNT:                       ${{ secrets.SF_ACCOUNT }}
   SF_USER:                          ${{ secrets.SF_USER }}
   SF_PASSWORD:                      ${{ secrets.SF_PASSWORD }}
-  SF_ROLE:                          MARKETING
+  SF_ROLE:                          ${{ secrets.SF_ROLE }}
   SF_DATABASE:                      ${{ secrets.SF_DATABASE }}
   SF_WAREHOUSE:                     ${{ secrets.SF_WAREHOUSE }}
-  VAR_FB_EL_START_DATE:             '2019-12-08T00:00:00Z'
-  VAR_FB_EL_END_DATE:               '2020-01-12T00:00:00Z'
-  DBT_TARGET:                       snowflake
+  VAR_FB_EL_START_DATE:             ${{ secrets.VAR_FB_EL_START_DATE }} #'2019-12-08T00:00:00Z'
+  VAR_FB_EL_END_DATE:               ${{ secrets.VAR_FB_EL_END_DATE }} #'2020-01-12T00:00:00Z'
   DBT_TARGET_SCHEMA:                DBT_MMS_DEMO
 
 jobs:
@@ -29,13 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: buremba/get-changed-files-with-regex@0.5
-        if: github.event_name == 'push' # only valid when a new commit is pushed
-        name: Changed Files Exporter with Regex
-        id: changedfiles
-        with:
-          token: ${{ github.token }}
-          pattern: '.+'
+
       # Installs Python 3.8
       - uses: actions/setup-python@v2
         with:
@@ -47,15 +40,17 @@ jobs:
           apt-get update && apt-get install libpq-dev
           pipx install meltano
           meltano install
-
-      - name: Run the extract, load and transform
+      - name: Sanity check
         run: |
-          meltano elt tap-facebook target-snowflake
+          meltano invoke --dump=catalog tap-facebook
+          meltano discover loaders
+      - name: Run the extract and load
+        run: |
+          meltano --log-level=debug elt tap-facebook target-snowflake --job_id=fb-ads-to-snowflake
           echo "Extract-load completed successfully!"
       - name: Install dbt Dependencies
         run: meltano invoke dbt:deps
-      - name: Run dbt compile # perform full-refresh for new/modified models
-        if: github.event_name == 'push'
+      - name: Run dbt compile
         run: meltano invoke dbt:compile
       - name: Run ELT [Scheduled]
         if: github.event_name == 'schedule'
