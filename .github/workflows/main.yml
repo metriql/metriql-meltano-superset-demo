@@ -42,8 +42,8 @@ jobs:
           meltano install
       - name: Sanity check
         run: |
-          meltano invoke --dump=catalog tap-facebook
-          meltano discover loaders
+          meltano --log-level=debug invoke --dump=catalog tap-facebook
+          meltano --log-level=debug discover loaders
       - name: Run the extract and load
         run: |
           meltano --log-level=debug elt tap-facebook target-snowflake --job_id=fb-ads-to-snowflake
