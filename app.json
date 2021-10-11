@@ -21,26 +21,9 @@
     "DBT_PROFILES_CONTENT": {
       "description": "The content of dbt's profiles.yml file. You should minify yml to a single file to pass the value. (Here is an online tool: https://onlineyamltools.com/minify-yaml)"
     },
-    "SF_ACCOUNT": {
-      "description": "Snowflake account id"
-    },
-    "SF_USER": {
-      "description": "Snowflake account user name"
-    },
-    "SF_PASSWORD": {
-      "description": "Snowflake account password"
-    },
-    "SF_ROLE": {
-      "description": "Snowflake Role"
-    },
-    "SF_DATABASE": {
-      "description": "Snowflake Database"
-    },
-    "SF_WAREHOUSE": {
-      "description": "Snowflake warehouse"
-    },
-    "DBT_TARGET_SCHEMA": {
-      "description": "Target schema name for dbt, usually dbt_user_name"
+    "PROFILE": {
+      "description": "dbt profile",
+      "value": "meltano"
     }
   }
 }
