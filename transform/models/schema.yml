@@ -36,7 +36,7 @@ sources:
                 sql: "{measure.total_clicks} / {measure.total_impressions} * 100"
                 suffix: "%"
               total_reach:
-                column: reach
+                column: reachbimv8888888 b vcm,  po/
                 aggregation: sum
               total_impressions:
                 column: impressions
@@ -59,60 +59,45 @@ sources:
                 aggregation: sum
               total_spend:
                 sql: COALESCE(spend, 0)
+                aggregation: sum
                 format_numbers: "$0,0"
 
         columns:
           - name: account_id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: account_name
           # - name: action_values
           # - name: actions
           - name: ad_id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: ad_name
           - name: adset_id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: adset_name
           - name: campaign_id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: campaign_name
-          # - name: canvas_avg_view_percent
-          # - name: canvas_avg_view_time
           - name: clicks
-          # - name: conversion_rate_ranking
-          # - name: cost_per_action_type
-          # - name: cost_per_inline_link_click
-          # - name: cost_per_inline_post_engagement
-          # - name: cost_per_unique_action_type
-          # - name: cost_per_unique_click
-          # - name: cost_per_unique_inline_link_click
-          - name: cpc
-          - name: cpm
-          - name: cpp
-          - name: ctr
           - name: date_start
           - name: date_stop
-          - name: engagement_rate_ranking
           - name: frequency
           - name: impressions
-          - name: inline_link_click_ctr
-          - name: inline_link_clicks
           - name: inline_post_engagement
-          # - name: objective
-          # - name: outbound_clicks
-          # - name: quality_ranking
           - name: reach
           - name: social_spend
           - name: spend
-          # - name: unique_actions
-          # - name: unique_clicks
-          # - name: unique_ctr
-          # - name: unique_inline_link_click_ctr
-          # - name: unique_inline_link_clicks
-          # - name: unique_link_clicks_ctr
-          # - name: video_30_sec_watched_actions
-          # - name: video_p100_watched_actions
-          # - name: video_p25_watched_actions
-          # - name: video_p50_watched_actions
-          # - name: video_p75_watched_actions
-          # - name: video_play_curve_actions
-          # - name: website_ctr
           - name: __loaded_at
 
       - name: adsets
@@ -135,11 +120,8 @@ sources:
             meta:
               metriql.dimension:
                 type: string
+                hidden: true
           - name: adlabels
-          - name: bid_info__actions
-          - name: bid_info__clicks
-          - name: bid_info__impressions
-          - name: bid_info__reach
           - name: budget_remaining
           - name: campaign_id
             meta:
@@ -166,93 +148,7 @@ sources:
             meta:
               metriql.dimension:
                 type: string
-          # - name: promoted_object__application_id
-          # - name: promoted_object__custom_event_type
-          # - name: promoted_object__object_store_url
-          # - name: promoted_object__offer_id
-          # - name: promoted_object__page_id
-          # - name: promoted_object__pixel_id
-          # - name: promoted_object__pixel_rule
-          # - name: promoted_object__product_set_id
           - name: start_time
-          # - name: targeting__age_max
-          # - name: targeting__age_min
-          # - name: targeting__app_install_state
-          # - name: targeting__audience_network_positions
-          # - name: targeting__behaviors
-          # - name: targeting__connections
-          # - name: targeting__custom_audiences
-          # - name: targeting__device_platforms
-          # - name: targeting__education_statuses
-          # - name: targeting__excluded_connections
-          # - name: targeting__excluded_custom_audiences
-          # - name: targeting__excluded_geo_locations__cities
-          # - name: targeting__excluded_geo_locations__countries
-          # - name: targeting__excluded_geo_locations__country_groups
-          # - name: targeting__excluded_geo_locations__custom_locations
-          # - name: targeting__excluded_geo_locations__geo_markets
-          # - name: targeting__excluded_geo_locations__location_types
-          # - name: targeting__excluded_geo_locations__regions
-          # - name: targeting__excluded_geo_locations__zips
-          # - name: targeting__excluded_publisher_categories
-          # - name: targeting__excluded_user_device
-          # - name: targeting__exclusions__behaviors
-          # - name: targeting__exclusions__connections
-          # - name: targeting__exclusions__custom_audiences
-          # - name: targeting__exclusions__education_majors
-          # - name: targeting__exclusions__excluded_connections
-          # - name: targeting__exclusions__excluded_custom_audiences
-          # - name: targeting__exclusions__family_statuses
-          # - name: targeting__exclusions__friends_of_connections
-          # - name: targeting__exclusions__generation
-          # - name: targeting__exclusions__home_ownership
-          # - name: targeting__exclusions__home_type
-          # - name: targeting__exclusions__household_composition
-          # - name: targeting__exclusions__income
-          # - name: targeting__exclusions__industries
-          # - name: targeting__exclusions__interests
-          # - name: targeting__exclusions__life_events
-          # - name: targeting__exclusions__moms
-          # - name: targeting__exclusions__net_worth
-          # - name: targeting__exclusions__politics
-          # - name: targeting__exclusions__relationship_statuses
-          # - name: targeting__exclusions__user_adclusters
-          # - name: targeting__exclusions__work_employers
-          # - name: targeting__exclusions__work_positions
-          # - name: targeting__facebook_positions
-          # - name: targeting__family_statuses
-          # - name: targeting__flexible_spec
-          # - name: targeting__friends_of_connections
-          # - name: targeting__genders
-          # - name: targeting__generation
-          # - name: targeting__geo_locations__cities
-          # - name: targeting__geo_locations__countries
-          # - name: targeting__geo_locations__country_groups
-          # - name: targeting__geo_locations__custom_locations
-          # - name: targeting__geo_locations__geo_markets
-          # - name: targeting__geo_locations__location_types
-          # - name: targeting__geo_locations__regions
-          # - name: targeting__geo_locations__zips
-          # - name: targeting__home_ownership
-          # - name: targeting__home_type
-          # - name: targeting__income
-          # - name: targeting__industries
-          # - name: targeting__instagram_positions
-          # - name: targeting__interested_in
-          # - name: targeting__interests
-          # - name: targeting__locales
-          # - name: targeting__messenger_positions
-          # - name: targeting__moms
-          # - name: targeting__net_worth
-          # - name: targeting__office_type
-          # - name: targeting__politics
-          # - name: targeting__publisher_platforms
-          # - name: targeting__relationship_statuses
-          # - name: targeting__targeting_optimization
-          # - name: targeting__user_adclusters
-          # - name: targeting__user_device
-          # - name: targeting__user_os
-          # - name: targeting__work_positions
           - name: updated_time
           - name: __loaded_at
 
@@ -271,9 +167,13 @@ sources:
                 sql: 'CAST(start_time as date)'
               is_active:
                 type: boolean
-                sql: 'CASE WHEN {TABLE}.effective_status = "ACTIVE" then TRUE else FALSE END'
+                sql: "CASE WHEN {TABLE}.effective_status = 'ACTIVE' then TRUE else FALSE END"
         columns:
           - name: account_id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: adlabels
           - name: ads__data
           - name: buying_type
@@ -333,11 +233,6 @@ sources:
                 type: string
                 hidden: true
           - name: bid_amount
-          - name: bid_info__actions
-          - name: bid_info__clicks
-          - name: bid_info__impressions
-          - name: bid_info__reach
-          - name: bid_info__social
           - name: bid_type
             meta:
               metriql.dimension:
@@ -347,10 +242,12 @@ sources:
               metriql.dimension:
                 type: string
                 hidden: true
-          - name: conversion_specs
           - name: created_time
-          - name: creative__creative_id
           - name: creative__id
+            meta:
+              metriql.dimension:
+                type: string
+                hidden: true
           - name: effective_status
           - name: id
             meta:
@@ -368,370 +265,5 @@ sources:
             meta:
               metriql.dimension:
                 type: string
-          # - name: targeting__age_max
-          # - name: targeting__age_min
-          # - name: targeting__app_install_state
-          # - name: targeting__audience_network_positions
-          # - name: targeting__behaviors
-          # - name: targeting__connections
-          # - name: targeting__custom_audiences
-          # - name: targeting__device_platforms
-          # - name: targeting__education_statuses
-          # - name: targeting__excluded_connections
-          # - name: targeting__excluded_custom_audiences
-          # - name: targeting__excluded_geo_locations__cities
-          # - name: targeting__excluded_geo_locations__countries
-          # - name: targeting__excluded_geo_locations__country_groups
-          # - name: targeting__excluded_geo_locations__custom_locations
-          # - name: targeting__excluded_geo_locations__geo_markets
-          # - name: targeting__excluded_geo_locations__location_types
-          # - name: targeting__excluded_geo_locations__regions
-          # - name: targeting__excluded_geo_locations__zips
-          # - name: targeting__excluded_publisher_categories
-          # - name: targeting__excluded_user_device
-          # - name: targeting__exclusions__behaviors
-          # - name: targeting__exclusions__connections
-          # - name: targeting__exclusions__custom_audiences
-          # - name: targeting__exclusions__education_majors
-          # - name: targeting__exclusions__excluded_connections
-          # - name: targeting__exclusions__excluded_custom_audiences
-          # - name: targeting__exclusions__family_statuses
-          # - name: targeting__exclusions__friends_of_connections
-          # - name: targeting__exclusions__generation
-          # - name: targeting__exclusions__home_ownership
-          # - name: targeting__exclusions__home_type
-          # - name: targeting__exclusions__household_composition
-          # - name: targeting__exclusions__income
-          # - name: targeting__exclusions__industries
-          # - name: targeting__exclusions__interests
-          # - name: targeting__exclusions__life_events
-          # - name: targeting__exclusions__moms
-          # - name: targeting__exclusions__net_worth
-          # - name: targeting__exclusions__politics
-          # - name: targeting__exclusions__relationship_statuses
-          # - name: targeting__exclusions__user_adclusters
-          # - name: targeting__exclusions__work_employers
-          # - name: targeting__exclusions__work_positions
-          # - name: targeting__facebook_positions
-          # - name: targeting__family_statuses
-          # - name: targeting__flexible_spec
-          # - name: targeting__friends_of_connections
-          # - name: targeting__genders
-          # - name: targeting__generation
-          # - name: targeting__geo_locations__cities
-          # - name: targeting__geo_locations__countries
-          # - name: targeting__geo_locations__country_groups
-          # - name: targeting__geo_locations__custom_locations
-          # - name: targeting__geo_locations__geo_markets
-          # - name: targeting__geo_locations__location_types
-          # - name: targeting__geo_locations__regions
-          # - name: targeting__geo_locations__zips
-          # - name: targeting__home_ownership
-          # - name: targeting__home_type
-          # - name: targeting__income
-          # - name: targeting__industries
-          # - name: targeting__instagram_positions
-          # - name: targeting__interested_in
-          # - name: targeting__interests
-          # - name: targeting__locales
-          # - name: targeting__messenger_positions
-          # - name: targeting__moms
-          # - name: targeting__net_worth
-          # - name: targeting__office_type
-          # - name: targeting__politics
-          # - name: targeting__publisher_platforms
-          # - name: targeting__relationship_statuses
-          # - name: targeting__targeting_optimization
-          # - name: targeting__user_adclusters
-          # - name: targeting__user_device
-          # - name: targeting__user_os
-          # - name: targeting__work_positions
-          # - name: tracking_specs
           - name: updated_time
           - name: __loaded_at
-
-# will revisit these if needed or else remove
-
-      # - name: ads_insights_age_and_gender
-      #   columns:
-      #     - name: account_id
-      #     - name: account_name
-      #     - name: action_values
-      #     - name: actions
-      #     - name: ad_id
-      #     - name: ad_name
-      #     - name: adset_id
-      #     - name: adset_name
-      #     - name: age
-      #     - name: campaign_id
-      #     - name: campaign_name
-      #     - name: canvas_avg_view_percent
-      #     - name: canvas_avg_view_time
-      #     - name: clicks
-      #     - name: conversion_rate_ranking
-      #     - name: cost_per_action_type
-      #     - name: cost_per_inline_link_click
-      #     - name: cost_per_inline_post_engagement
-      #     - name: cost_per_unique_action_type
-      #     - name: cost_per_unique_click
-      #     - name: cost_per_unique_inline_link_click
-      #     - name: cpc
-      #     - name: cpm
-      #     - name: cpp
-      #     - name: ctr
-      #     - name: date_start
-      #     - name: date_stop
-      #     - name: engagement_rate_ranking
-      #     - name: frequency
-      #     - name: gender
-      #     - name: impressions
-      #     - name: inline_link_click_ctr
-      #     - name: inline_link_clicks
-      #     - name: inline_post_engagement
-      #     - name: objective
-      #     - name: outbound_clicks
-      #     - name: quality_ranking
-      #     - name: reach
-      #     - name: social_spend
-      #     - name: spend
-      #     - name: unique_actions
-      #     - name: unique_clicks
-      #     - name: unique_ctr
-      #     - name: unique_inline_link_click_ctr
-      #     - name: unique_inline_link_clicks
-      #     - name: unique_link_clicks_ctr
-      #     - name: video_30_sec_watched_actions
-      #     - name: video_p100_watched_actions
-      #     - name: video_p25_watched_actions
-      #     - name: video_p50_watched_actions
-      #     - name: video_p75_watched_actions
-      #     - name: video_play_curve_actions
-      #     - name: website_ctr
-      #     - name: __loaded_at
-
-      # - name: ads_insights_country
-      #   columns:
-      #     - name: account_id
-      #     - name: account_name
-      #     - name: action_values
-      #     - name: actions
-      #     - name: ad_id
-      #     - name: ad_name
-      #     - name: adset_id
-      #     - name: adset_name
-      #     - name: campaign_id
-      #     - name: campaign_name
-      #     - name: canvas_avg_view_percent
-      #     - name: canvas_avg_view_time
-      #     - name: clicks
-      #     - name: conversion_rate_ranking
-      #     - name: cost_per_action_type
-      #     - name: cost_per_inline_link_click
-      #     - name: cost_per_inline_post_engagement
-      #     - name: cost_per_unique_action_type
-      #     - name: cost_per_unique_click
-      #     - name: cost_per_unique_inline_link_click
-      #     - name: country
-      #     - name: cpc
-      #     - name: cpm
-      #     - name: cpp
-      #     - name: ctr
-      #     - name: date_start
-      #     - name: date_stop
-      #     - name: engagement_rate_ranking
-      #     - name: frequency
-      #     - name: impressions
-      #     - name: inline_link_click_ctr
-      #     - name: inline_link_clicks
-      #     - name: inline_post_engagement
-      #     - name: objective
-      #     - name: outbound_clicks
-      #     - name: quality_ranking
-      #     - name: reach
-      #     - name: social_spend
-      #     - name: spend
-      #     - name: unique_actions
-      #     - name: unique_clicks
-      #     - name: unique_ctr
-      #     - name: unique_inline_link_click_ctr
-      #     - name: unique_inline_link_clicks
-      #     - name: unique_link_clicks_ctr
-      #     - name: video_30_sec_watched_actions
-      #     - name: video_p100_watched_actions
-      #     - name: video_p25_watched_actions
-      #     - name: video_p50_watched_actions
-      #     - name: video_p75_watched_actions
-      #     - name: video_play_curve_actions
-      #     - name: website_ctr
-      #     - name: __loaded_at
-
-      # - name: ads_insights_dma
-      #   columns:
-      #     - name: account_id
-      #     - name: account_name
-      #     - name: action_values
-      #     - name: actions
-      #     - name: ad_id
-      #     - name: ad_name
-      #     - name: adset_id
-      #     - name: adset_name
-      #     - name: campaign_id
-      #     - name: campaign_name
-      #     - name: canvas_avg_view_percent
-      #     - name: canvas_avg_view_time
-      #     - name: clicks
-      #     - name: conversion_rate_ranking
-      #     - name: cost_per_action_type
-      #     - name: cost_per_inline_link_click
-      #     - name: cost_per_inline_post_engagement
-      #     - name: cost_per_unique_action_type
-      #     - name: cost_per_unique_click
-      #     - name: cost_per_unique_inline_link_click
-      #     - name: cpc
-      #     - name: cpm
-      #     - name: cpp
-      #     - name: ctr
-      #     - name: date_start
-      #     - name: date_stop
-      #     - name: dma
-      #     - name: engagement_rate_ranking
-      #     - name: frequency
-      #     - name: impressions
-      #     - name: inline_link_click_ctr
-      #     - name: inline_link_clicks
-      #     - name: inline_post_engagement
-      #     - name: objective
-      #     - name: outbound_clicks
-      #     - name: quality_ranking
-      #     - name: reach
-      #     - name: social_spend
-      #     - name: spend
-      #     - name: unique_actions
-      #     - name: unique_clicks
-      #     - name: unique_ctr
-      #     - name: unique_inline_link_click_ctr
-      #     - name: unique_inline_link_clicks
-      #     - name: unique_link_clicks_ctr
-      #     - name: video_30_sec_watched_actions
-      #     - name: video_p100_watched_actions
-      #     - name: video_p25_watched_actions
-      #     - name: video_p50_watched_actions
-      #     - name: video_p75_watched_actions
-      #     - name: video_play_curve_actions
-      #     - name: website_ctr
-      #     - name: __loaded_at
-
-      # - name: ads_insights_platform_and_device
-      #   columns:
-      #     - name: account_id
-      #     - name: account_name
-      #     - name: action_values
-      #     - name: actions
-      #     - name: ad_id
-      #     - name: ad_name
-      #     - name: adset_id
-      #     - name: adset_name
-      #     - name: campaign_id
-      #     - name: campaign_name
-      #     - name: canvas_avg_view_percent
-      #     - name: canvas_avg_view_time
-      #     - name: clicks
-      #     - name: conversion_rate_ranking
-      #     - name: cost_per_action_type
-      #     - name: cost_per_inline_link_click
-      #     - name: cost_per_inline_post_engagement
-      #     - name: cost_per_unique_action_type
-      #     - name: cost_per_unique_click
-      #     - name: cost_per_unique_inline_link_click
-      #     - name: cpc
-      #     - name: cpm
-      #     - name: cpp
-      #     - name: ctr
-      #     - name: date_start
-      #     - name: date_stop
-      #     - name: engagement_rate_ranking
-      #     - name: frequency
-      #     - name: impression_device
-      #     - name: impressions
-      #     - name: inline_link_click_ctr
-      #     - name: inline_link_clicks
-      #     - name: inline_post_engagement
-      #     - name: objective
-      #     - name: outbound_clicks
-      #     - name: placement
-      #     - name: platform_position
-      #     - name: publisher_platform
-      #     - name: quality_ranking
-      #     - name: reach
-      #     - name: social_spend
-      #     - name: spend
-      #     - name: unique_actions
-      #     - name: unique_clicks
-      #     - name: unique_ctr
-      #     - name: unique_inline_link_click_ctr
-      #     - name: unique_inline_link_clicks
-      #     - name: unique_link_clicks_ctr
-      #     - name: video_30_sec_watched_actions
-      #     - name: video_p100_watched_actions
-      #     - name: video_p25_watched_actions
-      #     - name: video_p50_watched_actions
-      #     - name: video_p75_watched_actions
-      #     - name: video_play_curve_actions
-      #     - name: website_ctr
-      #     - name: __loaded_at
-
-      # - name: ads_insights_region
-      #   columns:
-      #     - name: account_id
-      #     - name: account_name
-      #     - name: action_values
-      #     - name: actions
-      #     - name: ad_id
-      #     - name: ad_name
-      #     - name: adset_id
-      #     - name: adset_name
-      #     - name: campaign_id
-      #     - name: campaign_name
-      #     - name: canvas_avg_view_percent
-      #     - name: canvas_avg_view_time
-      #     - name: clicks
-      #     - name: conversion_rate_ranking
-      #     - name: cost_per_action_type
-      #     - name: cost_per_inline_link_click
-      #     - name: cost_per_inline_post_engagement
-      #     - name: cost_per_unique_action_type
-      #     - name: cost_per_unique_click
-      #     - name: cost_per_unique_inline_link_click
-      #     - name: cpc
-      #     - name: cpm
-      #     - name: cpp
-      #     - name: ctr
-      #     - name: date_start
-      #     - name: date_stop
-      #     - name: engagement_rate_ranking
-      #     - name: frequency
-      #     - name: impressions
-      #     - name: inline_link_click_ctr
-      #     - name: inline_link_clicks
-      #     - name: inline_post_engagement
-      #     - name: objective
-      #     - name: outbound_clicks
-      #     - name: quality_ranking
-      #     - name: reach
-      #     - name: region
-      #     - name: social_spend
-      #     - name: spend
-      #     - name: unique_actions
-      #     - name: unique_clicks
-      #     - name: unique_ctr
-      #     - name: unique_inline_link_click_ctr
-      #     - name: unique_inline_link_clicks
-      #     - name: unique_link_clicks_ctr
-      #     - name: video_30_sec_watched_actions
-      #     - name: video_p100_watched_actions
-      #     - name: video_p25_watched_actions
-      #     - name: video_p50_watched_actions
-      #     - name: video_p75_watched_actions
-      #     - name: video_play_curve_actions
-      #     - name: website_ctr
-      #     - name: __loaded_at
